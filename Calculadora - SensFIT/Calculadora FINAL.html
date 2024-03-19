@@ -141,8 +141,8 @@
         // Ja o BRL especifica a moeda Real Brasileiro. 
         // em resumo, o número do resultado será formatado como real brasilero (R$10.000,00 por Ex.)
 
-        mesesCalculo.innerHTML = `${qtdMeses}`
-        mesesCalculo2.innerHTML = `${qtdMeses}`
+        mesesCalculo.innerHTML = `Em ${qtdMeses}`
+        mesesCalculo2.innerHTML = `Em ${qtdMeses}`
         mesesDesistencia.innerHTML = `${qtdMeses}`
 
         var valorFormatado = prejuizoMensalidade.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
