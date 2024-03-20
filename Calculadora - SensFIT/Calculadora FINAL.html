@@ -45,17 +45,17 @@
                     <p class="text-simule">Simule aqui!</p>
 
                     <span>Quantos meses deseja calcular?</span>
-                    <input type="number" class="input-data" id="ipt_qtdMeses" placeholder="Digite aqui">
+                    <input type="number" class="input-data" id="ipt_qtdMeses" placeholder="12">
                 </div>
 
                 <div class="group-span-input">
                     <span>Mensalidade da academia</span>
-                    <input type="number" class="input-data" id="ipt_valorMensalidade" placeholder="Digite aqui">
+                    <input type="number" class="input-data" id="ipt_valorMensalidade" placeholder="100">
                 </div>
 
                 <div class="group-span-input">
-                    <span>Quantos alunos desistiram nesse(s) <span id="mesesDesistencia"></span> mes(es)?</span>
-                    <input type="number" class="input-data" id="ipt_qtdDesistencias" placeholder="Digite aqui">
+                    <span>Quantos alunos desistiram nesse(s) mes(es)?</span>
+                    <input type="number" class="input-data" id="ipt_qtdDesistencias" placeholder="2000">
                 </div>
 
                 <div class="botao-personalizado">
@@ -143,7 +143,6 @@
 
         mesesCalculo.innerHTML = `Em ${qtdMeses}`
         mesesCalculo2.innerHTML = `Em ${qtdMeses}`
-        mesesDesistencia.innerHTML = `${qtdMeses}`
 
         var valorFormatado = prejuizoMensalidade.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
         
