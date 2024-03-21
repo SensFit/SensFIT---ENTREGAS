@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="group-span-input">
-                    <span>Quantos alunos desistiram nesse(s) mes(es)?</span>
+                    <span>Quantos alunos desistiram nesses meses?</span>
                     <input type="number" class="input-data" id="ipt_qtdDesistencias" placeholder="2000">
                 </div>
 
@@ -80,7 +80,7 @@
                     <div class="result-calc">
                         <span> Com a SensFIT você deixaria de perder</span>
                         <span id="span_resultadoGanho" class="number-result"></span>
-                        <span class="subtexto-ano"><span id="mesesCalculo2"></span> meses</span>
+                        <span class="subtexto-ano"><span id="mesesCalculo2"></span> </span>
                     </div>
                 </div>
 
@@ -142,7 +142,7 @@
         // em resumo, o número do resultado será formatado como real brasilero (R$10.000,00 por Ex.)
 
         mesesCalculo.innerHTML = `Em ${qtdMeses}`
-        mesesCalculo2.innerHTML = `Em ${qtdMeses}`
+        mesesCalculo2.innerHTML = `Em  média`
 
         var valorFormatado = prejuizoMensalidade.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
         
