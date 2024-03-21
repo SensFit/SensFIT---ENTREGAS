@@ -204,20 +204,4 @@ SELECT * FROM Usuario; -- Verificar se os campos da tabela Usuario existem, e se
 SELECT * FROM Maquina; -- Verificar se os campos da tabela Maquina existem, e se a FK da tabela Academia existe.
 SELECT * FROM DadosSensor; -- Verificar se os campos da tabela DadosSensor existem, e se as Foreign Keys das tabelas Academia e Maquina existem.
 
-SELECT Acad.*,
-	   '-' AS Separador,
-       Us.*,
-       '-' AS Separador,
-       Maq.*,
-       '-' AS Separador,
-       Sensor.*
-FROM Academia AS Acad
-INNER JOIN Usuario AS Us
-ON Acad.idAcademia = Us.FK_idAcademia
-
-INNER JOIN Maquina AS Maq
-ON Acad.idAcademia = Maq.FK_idAcademia
-
-INNER JOIN DadosSensor AS Sensor
-ON Acad.idAcademia = Sensor.FK_idAcademia;
 -- DROP DATABASE SensorAcademia;
