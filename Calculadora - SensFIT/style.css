@@ -157,7 +157,6 @@ header {
     padding: 1rem;
     gap: 15px;
 
-
 }
 
 .card-calc {
@@ -224,7 +223,7 @@ header {
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
-    margin-left: 45px;
+    margin-left: 75px;
 }
 
 
