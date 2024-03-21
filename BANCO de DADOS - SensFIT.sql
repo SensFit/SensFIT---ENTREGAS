@@ -1,6 +1,27 @@
 CREATE DATABASE SensorAcademia;
 USE SensorAcademia;
 
+-- CRIAÇÃO DA TABELA Cliente
+
+CREATE TABLE Cliente (
+idCliente INT AUTO_INCREMENT, 
+Nome VARCHAR(50),
+Telefone CHAR(11),
+Email VARCHAR(50),
+
+PRIMARY KEY PK_idCliente (idCliente) -- Fazendo a coluna idCliente se tornar uma PRIMARY KEY
+);
+
+INSERT INTO Cliente -- Coloco entre parentêses e por vírgula, todas as colunas menos a PrimaryKey da tabela, já que coloquei o AUTO_INCREMENT.
+(Nome, Telefone, Email)
+VALUES -- Inserindo dados para as colunas da tabela Cliente.
+('Rafael', '1199872111', 'rafael.lee@gmail.com'),
+('Kohatsu', '11947139850', 'gustavo.kohatsu@hotmail.com'),
+('Giovana', '11978713311', 'giovana.beltrao@gmail.com'),
+('Lucas', '11985188664', 'lucas.souza@sptech.com'),
+('Bianca', '11933268514', 'bianca.souza@sptech.com');
+
+SELECT * FROM Cliente;
 -- =============================================================================
 -- CRIAÇÃO DA TABELA Academia
 
@@ -10,45 +31,22 @@ Nome VARCHAR(80),
 CEP CHAR(9),
 Endereco VARCHAR(45),
 Numero INT,
+FK_idCliente INT NULL,
 
-PRIMARY KEY PK_idAcademia (idAcademia)
+PRIMARY KEY PK_idAcademia (idAcademia),
+FOREIGN KEY ForeignKey_idCliente (FK_idCliente) REFERENCES Cliente (idCliente)
 );
 
 INSERT INTO Academia
-(Nome, CEP, Endereco, Numero)
+(Nome, CEP, Endereco, Numero, FK_idCliente)
 VALUES
-('Green Fit', '03142020', 'Avenida Conselheiro Carrão', 666),
-('Esperto Fit', '04543040', 'Rua Oscar Freire', 228),
-('Bu Fit', '06634080', 'Av. Mato Grosso', 3520),
-('Ledi Fit', '87830020', 'Avenida Paulista', 735);
-
+('Green Fit', '03142020', 'Avenida Conselheiro Carrão', 666, 1),
+('Esperto Fit', '04543040', 'Rua Oscar Freire', 228, 2),
+('Bu Fit', '06634080', 'Av. Mato Grosso', 3520, 3),
+('Ledi Fit', '87830020', 'Avenida Paulista', 735, 4),
+('Test Fit', '87833221', 'Avenida Dutra', 123, 5);
 
 SELECT * FROM Academia;
--- =============================================================================
--- CRIAÇÃO DA TABELA Usuario
-
-CREATE TABLE Usuario (
-idUsuario INT AUTO_INCREMENT, 
-Nome VARCHAR(50),
-Telefone CHAR(11),
-Email VARCHAR(50),
-FK_idAcademia INT NOT NULL,
-
-PRIMARY KEY PK_idUsuario (idUsuario), -- Fazendo a coluna idUsuario se tornar uma PRIMARY KEY
-FOREIGN KEY ForeignKey_idAcademia (FK_idAcademia) REFERENCES Academia (idAcademia) -- Ao digitar "ForeignKey_id_Academia", estou dando um nome a chave estrangeira
-																				   -- O que está em parentêses "(FK_idAcademia)", é a coluna da tabela DadosSensor, após isso...
-																				   -- Usamos o "REFERENCES Academia (idAcademia)", para referenciar que "FK_idAcademia" é a chave estrangeira da coluna "idAcademia".
-);
-
-INSERT INTO Usuario -- Coloco entre parentêses e por vírgula, todas as colunas menos a PrimaryKey da tabela, já que coloquei o AUTO_INCREMENT.
-(Nome, Telefone, Email, FK_idAcademia)
-VALUES -- Inserindo os 4 valores para as 4 colunas que eu coloquei acima.
-('Rafael', '1199872111', 'rafael.lee@gmail.com', 1),
-('Kohatsu', '11947139850', 'gustavo.kohatsu@hotmail.com', 2),
-('Giovana', '11978713311', 'giovana.beltrao@gmail.com', 3),
-('Lucas', '11985188664', 'lucas.souza@sptech.com', 4);
-
-SELECT * FROM Usuario;
 -- =============================================================================
 -- CRIAÇÃO DA TABELA Maquina
 
@@ -73,22 +71,22 @@ VALUES -- Inserindo os 5 valores para as 5 colunas que eu coloquei acima.
 ('Leg press'				  , 'Pernas', 6, '1997-02-15', 2),
 ('Hack agachamento'			  , 'Pernas', 3, '2012-04-20', 3),
 ('Máquina agachamento livre'  , 'Pernas', 1, '2012-05-22', 4),
-('Cadeira extensora'		  , 'Pernas', 4, '2012-06-20', 1),
-('Cadeira flexora'			  , 'Pernas', 2, '2012-10-12', 2),
-('Mesa flexora'				  , 'Pernas', 2, '2012-02-23', 3),
-('Panturrilha'				  , 'Pernas', 3, '2004-07-24', 4),
-('Cadeira de abdução'		  , 'Pernas', 2, '2021-04-20', 1),
-('Cadeira de adução'		  , 'Pernas', 2, '2021-01-01', 2),
-('Elevação pélvica na máquina', 'Pernas', 5, '2021-03-30', 3),
-('Desenvolvimento na máquina' , 'Braços', 6, '2021-02-23', 4),
-('Tríceps máquina'			  , 'Braços', 6, '2021-06-10', 1),
-('Bíceps máquina'			  , 'Braços', 6, '2022-12-30', 2),
-('Antebraço giratório'		  , 'Braços', 1, '2023-01-01', 3),
-('Remada na máquina'		  , 'Tronco', 16, '2023-12-01', 4),
-('Supino'					  , 'Tronco', 12, '2004-10-25', 1),
-('Máquina abdominal'		  , 'Abdômen/Lombar', 8, '2002-04-20', 2),
-('Cadeira romana'			  , 'Abdômen/Lombar', 3, '2017-10-22', 3),
-('Polias'					  , 'Multiarticular', 10, '2019-12-16', 4),
+('Cadeira extensora'		  , 'Pernas', 4, '2012-06-20', 5),
+('Cadeira flexora'			  , 'Pernas', 2, '2012-10-12', 1),
+('Mesa flexora'				  , 'Pernas', 2, '2012-02-23', 2),
+('Panturrilha'				  , 'Pernas', 3, '2004-07-24', 3),
+('Cadeira de abdução'		  , 'Pernas', 2, '2021-04-20', 4),
+('Cadeira de adução'		  , 'Pernas', 2, '2021-01-01', 5),
+('Elevação pélvica na máquina', 'Pernas', 5, '2021-03-30', 1),
+('Desenvolvimento na máquina' , 'Braços', 6, '2021-02-23', 2),
+('Tríceps máquina'			  , 'Braços', 6, '2021-06-10', 3),
+('Bíceps máquina'			  , 'Braços', 6, '2022-12-30', 4),
+('Antebraço giratório'		  , 'Braços', 1, '2023-01-01', 5),
+('Remada na máquina'		  , 'Tronco', 16, '2023-12-01', 1),
+('Supino'					  , 'Tronco', 12, '2004-10-25', 2),
+('Máquina abdominal'		  , 'Abdômen/Lombar', 8, '2002-04-20', 3),
+('Cadeira romana'			  , 'Abdômen/Lombar', 3, '2017-10-22', 4),
+('Polias'					  , 'Multiarticular', 10, '2019-12-16', 5),
 ('Esteiras'					  , 'Cardio', 14, '2009-09-12', 1),
 ('Escadas'				 	  , 'Cardio', 2, '2012-04-10', 2),
 ('Elíptico'					  , 'Cardio', 10, '2019-11-20', 3),
@@ -146,6 +144,7 @@ SELECT * FROM Maquina;
 
 CREATE TABLE DadosSensor (
 idDadosSensor 		INT AUTO_INCREMENT, -- os IDs das tabelas, na maioria das vezes são as Primary Key...
+Tipo				VARCHAR(20),
 dtVerificacao 		DATE, 
 qtdUsos 			INT,
 horasUtilizadasDia 	INT,
@@ -166,32 +165,34 @@ FOREIGN KEY ForeignKey_id_Maquina (FK_idMaquina) REFERENCES Maquina (idMaquina) 
 );
 
 INSERT INTO DadosSensor -- Coloco entre parentêses e por vírgula, todas as colunas menos a PrimaryKey da tabela, já que coloquei o AUTO_INCREMENT.
-(dtVerificacao, qtdUsos, horasUtilizadasDia, Atividade, FK_idAcademia, FK_idMaquina)
+(Tipo, dtVerificacao, qtdUsos, horasUtilizadasDia, Atividade, FK_idAcademia, FK_idMaquina)
 VALUES -- Inserindo os 6 valores para as 6 colunas que eu coloquei acima.
-('2000-02-20', 30, 2, 'Ativo', 1, 1),
-('2012-05-22', 31, 3, 'Ativo', 2, 2),
-('2012-06-20', 32, 4, 'Ativo', 3, 3),
-('2012-10-12', 33, 5, 'Ativo', 4, 4),
-('2021-03-30', 34, 6, 'Ativo', 1, 5),
-('2021-02-23', 35, 7, 'Ativo', 2, 6),
-('2021-06-10', 36, 8, 'Ativo', 3, 7),
-('2021-06-11', 37, 9, 'Ativo', 4, 8),
-('2021-06-12', 38, 10, 'Ativo', 1, 9),
-('2021-06-13', 39, 11, 'Ativo', 2, 10),
-('2021-06-14', 40, 12, 'Ativo', 3, 11),
-('2021-06-15', 41, 13, 'Ativo', 4, 12),
-('2021-06-16', 42, 14, 'Inativo', 1, 13),
-('2021-06-17', 43, 15, 'Inativo', 2, 14),
-('2021-06-18', 44, 16, 'Inativo', 3, 15),
-('2021-06-19', 45, 17, 'Inativo', 4, 16),
-('2021-06-20', 46, 18, 'Inativo', 1, 17),
-('2021-06-21', 47, 19, 'Inativo', 2, 18),
-('2021-06-22', 48, 20, 'Inativo', 3, 19),
-('2021-06-23', 49, 21, 'Inativo', 4, 20),
-('2021-06-24', 50, 22, 'Inativo', 1, 21),
-('2021-06-25', 51, 23, 'Inativo', 2, 22),
-('2021-06-26', 52, 24, 'Inativo', 3, 23),
-('2021-06-27', 53, 25, 'Inativo', 4, 24);
+('Proximidade', '2000-02-20', 30, 2, 'Ativo', 1, 1),
+('Proximidade', '2012-05-22', 31, 3, 'Ativo', 2, 2),
+('Proximidade', '2012-06-20', 32, 4, 'Ativo', 3, 3),
+('Proximidade', '2012-10-12', 33, 5, 'Ativo', 4, 4),
+('Proximidade', '2021-03-30', 34, 6, 'Ativo', 5, 5),
+('Proximidade', '2021-02-23', 35, 7, 'Ativo', 1, 6),
+('Proximidade', '2021-06-10', 36, 8, 'Ativo', 2, 7),
+('Proximidade', '2021-06-11', 37, 9, 'Ativo', 3, 8),
+('Proximidade', '2021-06-12', 38, 10, 'Ativo', 4, 9),
+('Proximidade', '2021-06-13', 39, 11, 'Ativo', 5, 10),
+('Proximidade', '2021-06-14', 40, 12, 'Ativo', 1, 11),
+('Proximidade', '2021-06-15', 41, 13, 'Ativo', 2, 12),
+('Proximidade', '2021-06-16', 42, 14, 'Inativo', 3, 13),
+('Proximidade', '2021-06-17', 43, 15, 'Inativo', 4, 14),
+('Proximidade', '2021-06-18', 44, 16, 'Inativo', 5, 15),
+('Proximidade', '2021-06-19', 45, 17, 'Inativo', 1, 16),
+('Proximidade', '2021-06-20', 46, 18, 'Inativo', 2, 17),
+('Proximidade', '2021-06-21', 47, 19, 'Inativo', 3, 18),
+('Proximidade', '2021-06-22', 48, 20, 'Inativo', 4, 19),
+('Proximidade', '2021-06-23', 49, 21, 'Inativo', 5, 20),
+('Proximidade', '2021-06-24', 50, 22, 'Inativo', 1, 21),
+('Proximidade', '2021-06-25', 51, 23, 'Inativo', 2, 22),
+('Proximidade', '2021-06-26', 52, 24, 'Inativo', 3, 23),
+('Proximidade', '2021-06-27', 53, 25, 'Inativo', 4, 24);
+
+SELECT * FROM DadosSensor;
 
 DROP TABLE Academia; -- Dropar a tabela Academia caso precise.
 DROP TABLE Usuario; -- Dropar a tabela Usuario caso precise.
@@ -203,4 +204,20 @@ SELECT * FROM Usuario; -- Verificar se os campos da tabela Usuario existem, e se
 SELECT * FROM Maquina; -- Verificar se os campos da tabela Maquina existem, e se a FK da tabela Academia existe.
 SELECT * FROM DadosSensor; -- Verificar se os campos da tabela DadosSensor existem, e se as Foreign Keys das tabelas Academia e Maquina existem.
 
+SELECT Acad.*,
+	   '-' AS Separador,
+       Us.*,
+       '-' AS Separador,
+       Maq.*,
+       '-' AS Separador,
+       Sensor.*
+FROM Academia AS Acad
+INNER JOIN Usuario AS Us
+ON Acad.idAcademia = Us.FK_idAcademia
+
+INNER JOIN Maquina AS Maq
+ON Acad.idAcademia = Maq.FK_idAcademia
+
+INNER JOIN DadosSensor AS Sensor
+ON Acad.idAcademia = Sensor.FK_idAcademia;
 -- DROP DATABASE SensorAcademia;
